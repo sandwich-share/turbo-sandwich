@@ -39,5 +39,6 @@ abstract class AbstractHttpServer(ipAddress: InetAddress, port: Int) {
     def responseBody = Try(exchange.getResponseBody)
     def responseBodyWriter = responseBody.map { outStream => new OutputStreamWriter(outStream) }
     def responseQuery = Try(exchange.getRequestURI.getQuery)
+    def responsePath = Try(exchange.getRequestURI.getPath)
   }
 }
