@@ -10,3 +10,7 @@ class PersistentSettings extends Persistent[Settings] {
   
   override def unmarshal(reader: Reader): Settings = Settings.unmarshall(reader)
 }
+
+object PersistenceSettings {
+  val settings = new PersistentSettings()
+}

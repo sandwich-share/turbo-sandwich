@@ -36,6 +36,8 @@ abstract class AbstractHttpServer(ipAddress: InetAddress, port: Int) {
   
   class Request(private val exchange: HttpExchange) {
     def requestBody = Try(Source.fromInputStream(exchange.getRequestBody).mkString)
-    def responseBody = Try(new OutputStreamWriter(exchange.getResponseBody))
+    def responseBody = Try(exchange.getResponseBody)
+    def responseBodyWriter = responseBody.map { outStream => new OutputStreamWriter(outStream) }
+    def responseQuery = Try(exchange.getRequestURI.getQuery)
   }
 }

@@ -9,5 +9,11 @@ object PersistenceManager {
     serializerMap(key) = serializer
   }
   
-  def serialize(): Unit = ???
+  def serialize(): Unit = {
+    serializerMap.values.foreach { persistent => persistent.Write() }
+  }
+  
+  def deserialize(): Unit = {
+    serializerMap.values.foreach { persistent => persistent.Read() }
+  }
 }
