@@ -8,7 +8,7 @@ import com.turbosandwich.client.Peer.{
 }
 import com.turbosandwich.net.get
 
-object ControlLoop {
+class ControlLoop {
   final val MAX_SIZE = 100
   private var peerSet = Set[Peer]()
   

@@ -9,7 +9,7 @@ class PersistentPeerSet(
     private val unmarshaller: PeerSetUnmarshaller,
     private val marshaller: PeerSetMarshaller) extends Persistent[Set[Peer]] {
   
-  override val fileName = "peer_set"
+  override val serializationKey = "peer_set"
   
   override def marshal(output: OutputStream)(peerSet: Set[Peer]): Unit = marshaller(output)(peerSet)
   

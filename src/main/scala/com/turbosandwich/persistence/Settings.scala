@@ -1,12 +1,13 @@
 package com.turbosandwich.persistence
 
-import java.io.Writer
-import java.io.Reader
+import java.io.InputStream
+import java.io.OutputStream
+import java.nio.file.Path
 
-case class Settings(sandwichDirectory: String)
+case class Settings(sandwichDirectory: Path)
 
 object Settings {
-  def marshall(writer: Writer)(settings: Settings): Unit = ???
+  def marshall(writer: OutputStream)(settings: Settings): Unit = ???
   
-  def unmarshall(reader: Reader): Settings = ???
+  def unmarshall(reader: InputStream): Settings = ???
 }
