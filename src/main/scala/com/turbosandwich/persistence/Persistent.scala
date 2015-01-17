@@ -7,15 +7,15 @@ import java.io.Reader
 import java.io.FileWriter
 import java.io.FileReader
 
-trait Persistent[T] {
+abstract class Persistent[T <: AnyRef] {
   final val LOCAL_STORAGE_DIR = ".sandwich"
-  val fileName: String
+  val serializationKey: String
   
   def marshal(writer: Writer)(value: T): Unit
   
   def unmarshal(reader: Reader): T
   
-  def persistenceFile: File = Paths.get(LOCAL_STORAGE_DIR, fileName).toFile()
+  def persistenceFile: File = Paths.get(LOCAL_STORAGE_DIR, serializationKey).toFile()
   
   def Read(): T = {
     val fileReader = new FileReader(persistenceFile)
