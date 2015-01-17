@@ -13,10 +13,11 @@ import java.net.HttpURLConnection
 import java.net.URI
 import java.io.OutputStream
 import java.io.InputStream
+import com.turbosandwich.files.FileEntry
 
 package object client {
 
-  def getFile(address: InetAddress, path: Path) {
+  def getFile(address: InetAddress, path: Path): Unit = {
     val localPath = Paths.get(PersistentSettings.settings.value + File.separator + path)
     onSuccess(new URI("http", null, address.getHostAddress, portHash(address), "/files/" + path, null, null).toURL).foreach { url =>
       val connection = url.openConnection.asInstanceOf[HttpURLConnection]
@@ -28,4 +29,6 @@ package object client {
       }
     }
   }
+  
+  def getQuery(address: InetAddress, path: Path): Option[Set[FileEntry]] = ???
 }
