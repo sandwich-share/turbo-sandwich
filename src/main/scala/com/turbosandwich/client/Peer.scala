@@ -4,6 +4,8 @@ import java.net.InetAddress
 import java.util.Date
 import java.io.Reader
 import java.io.Writer
+import com.turbosandwich.persistence.Unmarshaller
+import com.turbosandwich.persistence.Marshaller
 
 case class Peer(ipAddress: InetAddress, lastSeen: Date, available: Boolean) {
   def unavailable = Peer(ipAddress, lastSeen, false)
@@ -14,10 +16,10 @@ case class Peer(ipAddress: InetAddress, lastSeen: Date, available: Boolean) {
 }
 
 object Peer {
-  type PeerSetUnmarshaller = Reader => Set[Peer]
-  type PeerSetMarshaller = Set[Peer] => Writer
+  type PeerSetUnmarshaller = Unmarshaller[Set[Peer]]
+  type PeerSetMarshaller = Marshaller[Set[Peer]]
   
   def unmarshall(reader: Reader): Set[Peer] = ???
   
-  def marshall(peerSet: Set[Peer]): Writer = ???
+  def marshall(writer: Writer, peerSet: Set[Peer]): Unit = ???
 }
