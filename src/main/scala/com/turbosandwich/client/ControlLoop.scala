@@ -4,7 +4,7 @@ import scala.util.Random
 import scala.io.Source
 import com.turbosandwich.client.Peer.{
   PeerSetUnmarshaller,
-  unmarshall
+  unmarshal
 }
 import com.turbosandwich.net.get
 
@@ -15,7 +15,7 @@ object ControlLoop {
   def run: Unit = {
     while (true) {
       val peer = peerSet.minBy { peer => peer.lastSeen }
-      downloadRemotePeerSet(peer, unmarshall)
+      downloadRemotePeerSet(peer, unmarshal)
         .map { remoteSet => mergeLocalAndRemote(peer, peerSet, remoteSet) }
         .foreach { newSet => peerSet = newSet }
     }

@@ -21,12 +21,12 @@ object Peer {
   type PeerSetUnmarshaller = Unmarshaller[Set[Peer]]
   type PeerSetMarshaller = Marshaller[Set[Peer]]
   
-  def unmarshall(input: InputStream): Set[Peer] = {
+  def unmarshal(input: InputStream): Set[Peer] = {
     val reader = TransitFactory.reader(TransitFactory.Format.MSGPACK, input)
     return reader.read[Set[Peer]]()
   }
   
-  def marshall(output: OutputStream, peerSet: Set[Peer]): Unit = {
+  def marshal(output: OutputStream, peerSet: Set[Peer]): Unit = {
     val writer = TransitFactory.writer[Set[Peer]](TransitFactory.Format.MSGPACK, output)
     writer.write(peerSet)
   }
