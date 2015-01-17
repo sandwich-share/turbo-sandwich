@@ -3,8 +3,7 @@ package com.turbosandwich.persistence
 import com.turbosandwich.client.Peer
 import com.turbosandwich.client.Peer.PeerSetMarshaller
 import com.turbosandwich.client.Peer.PeerSetUnmarshaller
-import java.io.Writer
-import java.io.Reader
+import java.io.{OutputStream, InputStream, Writer, Reader}
 
 class PersistentPeerSet(
     private val unmarshaller: PeerSetUnmarshaller,
@@ -12,7 +11,7 @@ class PersistentPeerSet(
   
   override val fileName = "peer_set"
   
-  override def marshal(writer: Writer)(peerSet: Set[Peer]): Unit = marshaller(writer)(peerSet)
+  override def marshal(output: OutputStream)(peerSet: Set[Peer]): Unit = marshaller(output)(peerSet)
   
-  override def unmarshal(reader: Reader) = unmarshaller(reader)
+  override def unmarshal(input: InputStream) = unmarshaller(input)
 }

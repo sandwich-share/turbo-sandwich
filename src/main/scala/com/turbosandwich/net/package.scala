@@ -1,7 +1,7 @@
 package com.turbosandwich
 
 import java.io.InputStreamReader
-import java.io.Reader
+import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.InetAddress
 import java.net.URL
@@ -16,9 +16,9 @@ package object net {
     new URL("http://" + address.getHostAddress + ":" + portHash(address) + extension)
   }
   
-  def get[T](address: InetAddress, request: String)(handler: Reader => T): Option[T] = {
+  def get[T](address: InetAddress, request: String)(handler: InputStream => T): Option[T] = {
     Try(buildURL(address)(request).openConnection().asInstanceOf[HttpURLConnection])
-      .flatMap { connection => Try(new InputStreamReader(connection.getInputStream)) }
+      .flatMap { connection => Try(connection.getInputStream) }
       .flatMap { reader =>
         val result = Try(handler(reader))
         reader.close()
