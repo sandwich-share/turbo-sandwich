@@ -3,3 +3,9 @@ target/
 config/
 .idea/
 .idea_modules/
+.cache
+.classpath
+.project
+*.iml
+*.swp
+*.class
